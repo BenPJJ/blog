@@ -1,26 +1,104 @@
 # Mockjs
 
-## 1. 安装
+mock 是一个模拟数据生成器，旨在帮助前端独立于后端进行开发，帮助编写单元测试
+
+## 功能
+
+- 根据数据模板生成，模板数据
+- 模拟ajax 请求，生成请求数据
+- 基于html模板生成模拟数据
+
+## 安装
 
 ``` js
 npm install --save mockjs
 ```
 
-## 2. 引入文件
+## 基本配置
+
+### 简单使用
+
+新建mockjs文件夹
+
+``` js
+// index.js
+import xxx from './xxx';
+
+export {
+	xxx
+};
+```
+
+``` js
+// xxx.js
+import Mock from 'mockjs';
+
+const xxx = Mock.mock(url, {
+  // ...配置数据
+});
+
+export default xxx;
+```
+
+需要的进行文件引入
+
+``` vue
+import { xxx } from '../../mockjs';
+import Axios from 'axios';
+
+export default {
+  data() {
+    return {};
+  },
+  mounted() {
+    Axios.get(url)
+    	.then((response) => {
+      	console.log(response);
+    	})
+    	.catch((error) => {
+      	console.log(error);
+    	});
+  },
+};
+```
+
+## API
+
+``` js
+Mock.mock(rurl?, rtype?, template|function(options))
+```
+
+- rurl 需要拦截的url（string|reg）
+- rtype 需要拦截的Ajax 请求类型，如get、post、put、delete等
+- template 表示数据模板（object|string），如`{'data|1-10':[{}]}` 、`@EMAIL`
+- function(options) 用于生成响应数据的函数
+- options 本次请求的Ajax 选项集，含有url、type、body 三个属性
+
+## Example
+
+### 例子一：
 
 ``` js
 import Mock from 'mockjs';
+
+const scroll = Mock.mock('https://api.office.bzdev.net/scroll.json', {
+  'dataLeft|6': [{
+    'name|+1': ['a', 'b', 'c', 'd', 'e', 'f']
+  }],
+  'dataRight|6': [{
+    'name|+1': ['a', 'b', 'c', 'd', 'e', 'f'],
+    'content': ['1', '2', '3', '4', '5']
+  }],
+});
 ```
 
-## 3. 特性
+### 例子二：
 
-- 数据类型丰富
+``` js
 
-  支持生成随机的文本、数字、布尔值、日期、邮箱、链接、图片、颜色等
+```
 
-- 拦截Ajax 请求
 
-  不需要修改既有代码，就可以拦截Ajax 请求，返回模拟的响应数据。安全又便捷
 
 ## 4. 语法规范
 
@@ -203,34 +281,6 @@ Mock.mock({
     }
 }
 ```
-
-## 5. API
-
-- Mock.mock(url, type, data)
-
-  | 参数名   | 参数需求                 | 参数描述       | 例子                               |
-  | -------- | ------------------------ | -------------- | ---------------------------------- |
-  | url      | 可选：URL字符串或URL正则 | 拦截请求的地址 | /mock                              |
-  | type     | 可选                     | 拦截Ajax       | GET、POST                          |
-  | template | 可选：可以是对象或字符串 | 生成数据的模板 | {'data\|1-10':['mock']} 、'@EMAIL' |
-
-  ``` js
-  // 类型1： 名字|规则：内容
-  Mock.mock({'data|1-4': '哑巴'})
-  
-  // 生成1-4 个哑巴字符串
-  {
-    data: "哑巴哑巴哑巴哑巴"
-  }
-  
-  // 类型2：Mock自带模板
-  Mock.mock('@province')
-  
-  // 随机生成一个省份
-  "上海"
-  ```
-
-## 6. 例子
 
 - 生成图片
 
