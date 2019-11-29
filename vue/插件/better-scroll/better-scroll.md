@@ -234,7 +234,41 @@ JSON.stringify(scroll, null, 4);
 
 ### 例子二：上拉加载和下拉刷新
 
-``` vue
+#### 添加配置项
 
+pullup 的配置项`pullUpLoad`
+
+pulldown 的配置项`pullDownRefresh`
+
+#### 基本配置
+
+``` vue
+<script>
+	export default {
+    data() {
+      return {};
+    },
+    methods: {
+      initScroll() {
+        this.scroll = new BScroll('.dome-wrapper', {
+          scrollY: true,
+          pullDownRefresh: true,
+          pullUpLoad: true,
+        });
+        this.scroll.on('pullingUp', () => {
+          console.log('上拉加载');
+          this.scroll.finishPullUp();
+        });
+      },
+    },
+  };
+</script>
 ```
+
+【切记】
+
+- 在添加事件时，一定要在回调的最后调用`finishPullUp()` 和`finishPullDown()` 方法来告诉BScroll 一次上拉加载和下拉刷新动作结束，否则上拉加载和下拉刷新效果只会触发一次
+- 如果wrapper 里面的结构发生变化一定要调用`refresh()` 方法重新初始化BScroll，否则会导致滑动异常
+
+
 
