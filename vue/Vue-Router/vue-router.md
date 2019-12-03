@@ -1,8 +1,8 @@
+# Vue-Router
 
+## Vue-Router导航守卫
 
-# 导航守卫
-
-## 全局守卫
+### 全局守卫
 
 **vue-router 全局有三个守卫：**
 
@@ -35,7 +35,7 @@ router.afterEach((to, from, next) => {
 
   - next 跳转新路由，当前的导航被中断，重新开始一个新的导航
 
-## 路由独尊守卫
+### 路由独尊守卫
 
 如果不想全局守卫的话，可以为某些路由单独配置守卫
 
@@ -54,7 +54,7 @@ const router = new VueRouter({
 });
 ```
 
-## 路由组件内的守卫
+### 路由组件内的守卫
 
 - `beforeRouterEnter` 进入路由前
 - `beforeRouterUpdate` 路由复用同一个组件时
