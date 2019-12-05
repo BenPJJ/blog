@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
 
 ``` js
 # hash模式
-router.afterEach((to, from, next) => {
+router.afterEach((to, from) => {
   if (window._hmt && to.path) {
     const location = window.location;
     const pagePath = location.pathname + '#' + to.fullPath;
