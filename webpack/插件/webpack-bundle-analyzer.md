@@ -4,7 +4,7 @@ webpack 打包体积优化
 
 ## 安装
 
-``` js
+``` shell
 npm install --save-dev webpack-bundle-analyzer
 ```
 
