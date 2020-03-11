@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // for (var i = 0; i < 10; i++) {
+    //     document.write('hello world')
+    // }
+
+    /* 
+        执行程序
+        程序被 CPU 所执行
+     */
+
+    // 函数的声明 就相当于写说明书 写第 41 页说明书
+    // function print() {
+    //     for (var i = 0; i < 10; i++) {
+    //         document.write('hello world<br />')
+    //     }
+    // }
+
+    // 函数被调用的时候 告诉 CPU 请翻到第 41 页进行执行
+    // print()
+
+
+    // 有参函数声明
+    function print(n) { // n 形参 n = 10
+        for (var i =0; i < n; i++) {
+            document.write("hello world!<br />")
+        }
+    }
+
+    // 函数调用 实参给形参进行赋值 10实参 n形参
+    print(10)
+</script>
+</html>

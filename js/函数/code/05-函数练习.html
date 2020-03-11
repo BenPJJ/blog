@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+        判断一个年份是不是闰年
+        分析：
+            参数：年份
+            返回值：是否是闰年
+    */
+
+    function leapYear(year) {
+        if (year % 400 === 0 || year % 4 === 0 && year % 100 != 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    alert(leapYear(2018))
+
+    /* 
+        判断一个数是否是素数
+        素数：只能被 1 和 它本身整除
+
+        参数：一个数
+        返回值：是否是素数  布尔值
+    */
+
+    function primeNumber(num) {
+       var isYes = false // 是否是素数
+
+       for (var i = 2; i < num; i++) {
+           if (num % i === 0) {
+               isYes = true // 只要有一次成功
+               break  
+           } 
+                
+       }  
+
+       return !isYes
+    }
+
+    alert(primeNumber(6))
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    /* 
+        作用域：就是起作用的返回，或者说有效范围，每一个函数的声明都会形成一个作用域
+     */
+
+    // var a = 10
+    // function sum() {
+    //     a = 5
+    // }
+    // console.log(a) // 10
+    // sum()
+    // console.log(a) // 5
+
+    // var a = 10
+    // function sum() {
+    //     var a = 5
+    //     console.log(a) // 5
+    // }
+    // console.log(a) // 10
+    // sum()
+    // console.log(a) // 10
+
+    function sum() {
+        var a = 5
+        alert(a)
+    }
+    sum()
+    alert(a)
+</script>
+</html>
