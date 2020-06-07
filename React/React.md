@@ -1,6 +1,133 @@
 # React
 
-## Reactjs
+## ReactJS
+
+### 高阶组件
+
+- React.Memo()
+
+  ``` jsx
+  function MyComponent(props) {
+  	// 使用props渲染  
+  }
+  
+  function areEqual(prevProps, nextProps) {
+    // 如果把nextProps传入render方法的返回结果与将prevProps传入render方法的返回结果一致则返回true，否则返回false
+  }
+  
+  export default React.memo(MyComponent, areEqual)
+  ```
+
+  当父组件引入子组件的情况下，往往会造成组件之间的一些不必要的浪费。如下面例子，每次父组件更新count，子组件都会更新，使用memo之后，count变化子组件就没有更新啦
+
+  ``` jsx
+  import React, { useState, memo } from 'react';
+  
+  const Child = (props) => {
+    console.log('子组件')
+    return (
+      <div>我是一个子组件</div>
+    )
+  }
+  
+  const ChildMemo = memo(Child)
+  
+  function Index() {
+    const [ count, setCount ] = useState(0);
+  
+    return (
+      <div>
+        <p>count:{count}</p>
+        <button onClick={() => {setCount(count + 1)}}>加一</button>
+        <ChildMemo />
+      </div>
+    )
+  }
+  
+  export default Index;
+  ```
+
+### API
+
+- Context
+
+  // 使用前
+
+  ```jsx
+  import React, { Component } from 'react';
+  
+  class Index extends Component {
+    render() { 
+      return ( 
+        <Toolabr theme="yellow" />
+       );
+    }
+  }
+  
+  function Toolabr(props) {
+    return (
+      <div>
+        <ThemedButton theme={props.theme} />
+      </div>
+    )
+  }
+  
+  class ThemedButton extends Component {
+    render() {
+      return ( 
+        <button style={{background: this.props.theme}}>你好</button>
+       );
+    }
+  }
+  
+  export default Index;
+  ```
+
+  //  使用后
+
+  ``` jsx
+  import React, { Component, createContext } from 'react';
+  
+  const ThemeContext = createContext('yellow');
+  
+  class Index extends Component {
+    render() { 
+      return ( 
+        // 使用一个Provider来将当前的theme传递给以下的组件树
+        // 无论多深，任何组件都能读取这个值
+        <ThemeContext.Provider value="blue">
+          <Toolabr/>
+        </ThemeContext.Provider>
+       );
+    }
+  }
+  
+  function Toolabr() {
+    return (
+      <div>
+        <ThemedButton />
+      </div>
+    )
+  }
+  
+  class ThemedButton extends Component {
+    // 指定contextType读取当前的theme context
+  	// React 会往上找到最近的theme Provider，然后使用它的值
+    static contextType = ThemeContext;
+    
+    render() {
+      return ( 
+        <button style={{background: this.context}}>你好</button>
+       );
+    }
+  }
+  
+  export default Index;
+  ```
+
+  
+
+
 
 ### 工具
 
@@ -232,5 +359,9 @@ module.exports = function override(config, env) {
 }
 ```
 
+## React Hooks
 
+``` jsx
+
+```
 
