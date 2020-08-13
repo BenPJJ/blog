@@ -365,3 +365,77 @@ module.exports = function override(config, env) {
 
 ```
 
+### useContext
+
+- 父子组件同一个目录
+
+  > 这个用法存在一个问题，父子组件不在同一个目录中，如何共享AppContext这个context实例
+
+  ``` jsx
+  // Test.jsx
+  import React, { useContext } from 'react';
+  
+  const test = () => {
+  	const AppContext = React.CreateContext({});
+  
+  	const A = () => {
+      const { name } = useContext(AppContext)
+  		return (
+  			<p>name:{{name}}</p>
+  		)
+  	}
+    
+    return (
+      <AppContext.Provider value={{name: 'test'}}>			
+      	<A/>
+      </AppContext.Provider>
+    )
+  }
+  
+  export default test;
+  ```
+
+- 父子组件不在同一个目录
+
+  > 通过Context Manager统一管理上下文的实例
+
+  ``` jsx
+  // context-manager.js
+  import React from 'react';
+  const AppContext = React.createContext();
+  export default AppContext;
+  ```
+
+  ``` jsx
+  // A.jsx
+  import React, { useContext } from 'react';
+  import AppContext from './context-manager';
+  
+  const A = () => {
+    const { name } = useContext(AppContext);
+    return (
+      <p>name:{name}</p>
+    )
+  }
+  
+  export default A;
+  ```
+
+  ``` jsx
+  // Test.jsx
+  import React, { useContext } from 'react';
+  import AppContext from './context-manager';
+  import A from './A';
+  
+  const test = () => {
+    return (
+      <AppContext.Provider value={{name: 'pjj'}}>			
+      	<A/>
+      </AppContext.Provider>
+    )
+  }
+  
+  export default test;
+  ```
+
+  
