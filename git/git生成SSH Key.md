@@ -48,6 +48,33 @@ The key's randomart image is:
 
 ## 5. 测试是否添加成功
 
-> ssh git@github.com
+> ssh -T git@github.com
 
 提示：`Hi BenPJJ! You've successfully authenticated, but GitHub does not provide shell access.`  说明添加成功
+
+## 6. 如果连接不成功
+
+> ssh: connect to host github.com port 22: Connection timed out
+>
+> fatal: Could not read from remote repository.
+>
+> Please make sure you have the correct access rights
+>
+> and the repository exists.
+
+找到git安装路径下的Git\etc\ssh\ssh_config文件，打开在后面添加上下面这段代码，再次连接就成功啦
+
+```
+Host github.com
+
+User git
+
+Hostname ssh.github.com
+
+PreferredAuthentications publickey
+
+IdentityFile ~/.ssh/id_rsa
+
+Port 443
+```
+
