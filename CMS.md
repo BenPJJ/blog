@@ -52,7 +52,7 @@ BBS_SEEDIT_COM => http://bbs.bozhong.com
    判断当前是否是移动端访问，用于根据环境加载不同 block 
 
   ``` js
-  Seedit_Func::checkmobile()
+  Seedit_Func::checkmobile()1
   ```
 
 ## Example
